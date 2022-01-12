@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<launch>
+	
+    <!-- Available Plots -->
+
+	<arg name="imu"					default="false"			/>
+	<arg name="quaternion"          default="false"         />
+	<arg name="rpy"					default="false"			/>
+	<arg name="angular_velocity"    default="false"         />
+	<arg name="acceleration"        default="false"			/>
+	<arg name="mag"                 default="false"			/>
+	
+	<param name="imu"				type="bool"         value="$(arg imu)"					/>
+	<param name="quaternion"        type="bool"         value="$(arg quaternion)"           />
+	<param name="rpy"				type="bool"         value="$(arg rpy)"					/>
+	<param name="angular_velocity"  type="bool"         value="$(arg angular_velocity)"     />
+	<param name="acceleration"      type="bool"         value="$(arg acceleration)"         />
+	<param name="mag"               type="bool"         value="$(arg mag)"					/>
+
+	<!-- Quaternion plot -->
+	<group if="$(arg quaternion)">
+		<node     name="quaternion_plot"
+				  pkg="rqt_plot"
+				  type="rqt_plot"
+				  args="/imu/quaternion/quaternion/x /imu/quaternion/quaternion/y /imu/quaternion/quaternion/z /imu/quaternion/quaternion/w" 
+				  />
+	</group>
+
+	<!-- Euler angle plot -->
+	<group if="$(arg rpy)">
+		<node     name="rpy_plot"
+				  pkg="rqt_plot"
+				  type="rqt_plot"
+				  args="/imu/rpy/vector/x /imu/rpy/vector/y /imu/rpy/vector/z" 
+				  />
+	</group>
+
+	<!-- Angular velocity plot -->
+	<group if="$(arg angular_velocity)">
+		<node     name="angular_velocity_plot"
+				  pkg="rqt_plot"
+				  type="rqt_plot"
+				  args="/imu/angular_velocity/vector/x /imu/angular_velocity/vector/y /imu/angular_velocity/vector/z" 
+				  />
+	</group>
+
+	<!-- Acceleration plot -->
+	<group if="$(arg acceleration)">
+		<node     name="acceleration_plot"
+				  pkg="rqt_plot"
+				  type="rqt_plot"
+				  args="/imu/acceleration/vector/x /imu/acceleration/vector/y /imu/acceleration/vector/z" 
+				  />
+	</group>
+
+	<!-- Magnetic field plot -->
+	<group if="$(arg mag)">
+		<node     name="mag_plot"
+				  pkg="rqt_plot"
+				  type="rqt_plot"
+				  args="/imu/mag/magnetic_field/x /imu/mag/magnetic_field/y /imu/mag/magnetic_field/z" 
+				  />
+	</group>
+
+	<!-- IMU Rviz plugin -->
+	<group if="$(arg imu)">
+		<node type="rviz" name="imu_view" pkg="rviz" args="-d $(find muse_ros)/rviz/imu_config.rviz"/>
+	</group>
+
+</launch>

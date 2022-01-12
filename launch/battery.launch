@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Available Commands -->	
+	<arg name="charge"			default="false"				/>
+	<arg name="voltage"			default="false"				/>
+	
+	<param name="get_battery_charge"		type="bool"         value="$(arg charge)"			/>
+	<param name="get_battery_voltage"		type="bool"         value="$(arg voltage)"			/>
+
+	<!-- Command publisher -->
+    <node name="battery"  pkg="muse_ros"     type="battery"    output="screen"/>
+
+
+</launch>

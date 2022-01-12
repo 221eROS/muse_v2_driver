@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- ROS Params -->
+	<arg name="publisher_queue_size"	default="10"		/>
+	<arg name="rate"					default="50"		/>
+	
+	<!-- Desired sampling frequency frequency - Admitted range: [1-150] (Hz) -->
+	<arg name="frequency"				default="150"       />
+	
+    <!-- Available Transmissions -->
+	<arg name="imu"                 default="true"			/>
+	<arg name="quaternion"          default="true"			/>
+	<arg name="rpy"					default="true"			/>
+	<arg name="angular_velocity"    default="true"			/>
+	<arg name="acceleration"        default="true"			/>
+	<arg name="mag"                 default="true"			/>
+
+	<!-- Params setup -->
+	<param name="frequency"				type="int"          value="$(arg frequency)"			/>
+	<param name="publisher_queue_size"	type="int"          value="$(arg publisher_queue_size)"	/>
+	<param name="rate"					type="int"          value="$(arg rate)"					/>
+	<param name="get_imu"				type="bool"         value="$(arg imu)"                  />
+	<param name="get_quaternion"		type="bool"         value="$(arg quaternion)"           />
+	<param name="get_rpy"				type="bool"         value="$(arg rpy)"					/>
+	<param name="get_angular_velocity"	type="bool"         value="$(arg angular_velocity)"     />
+	<param name="get_acceleration"		type="bool"         value="$(arg acceleration)"         />
+	<param name="get_mag"				type="bool"         value="$(arg mag)"					/>
+
+	<!-- Command publisher -->
+    <node name="start_transmission"		pkg="muse_ros"		type="start_transmission"    output="screen" required="true"/>
+
+</launch>

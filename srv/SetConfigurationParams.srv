@@ -1,0 +1,19 @@
+bool set_gyroscope_full_scale
+uint16 gyroscope_full_scale
+bool set_accelerometer_full_scale
+uint8 accelerometer_full_scale
+bool set_accelerometer_hdr_full_scale
+uint16 accelerometer_hdr_full_scale
+bool set_magnetometer_full_scale
+uint8 magnetometer_full_scale
+bool set_log_mode
+uint8 log_mode
+bool set_log_frequency
+uint8 log_frequency
+---
+bool gyroscope_full_scale_changed
+bool accelerometer_full_scale_changed
+bool accelerometer_hdr_full_scale_changed
+bool magnetometer_full_scale_changed
+bool log_mode_changed
+bool log_frequency_changed

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- ROS Params -->
+	<arg name="publisher_queue_size"	default="10"				/>
+
+	<!-- Connection port -->
+	<arg name="port_name"				default="COM4"				/>
+
+	<!-- Desired baudrate -->
+	<arg name="baudrate"				default="115200"            />
+
+	<!-- TF transform frame_id (default: imu_link), you may want to change it if you use multiple devices -->
+	<arg name="frame_id"                default="imu_link"      />
+	
+    <!-- Params setting -->
+	<param name="publisher_queue_size"  type="int"			value="$(arg publisher_queue_size)"     />
+	<param name="port_name"             type="string"       value="$(arg port_name)"                />
+	<param name="baudrate"				type="int"          value="$(arg baudrate)"					/>
+	<param name="frame_id"              type="string"       value="$(arg frame_id)"                 />
+
+	<!-- Data publisher -->
+    <node name="muse"          pkg="muse_ros"     type="muse"    output="screen" required="true"/>
+
+</launch>

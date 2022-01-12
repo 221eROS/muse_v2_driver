@@ -1,0 +1,3 @@
+bool stop_transmission
+---
+bool transmission_stopped

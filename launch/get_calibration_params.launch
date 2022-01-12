@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<!-- Available Commands -->
+	<arg name="gyroscope"			default="true"				/>
+	<arg name="accelerometer"		default="true"				/>
+	<arg name="magnetometer"		default="true"				/>
+
+	<param name="get_gyroscope_offset"				type="bool"         value="$(arg gyroscope)"		/>
+	<param name="get_accelerometer_calib_params"	type="bool"         value="$(arg accelerometer)"	/>
+	<param name="get_magnetometer_calib_params"		type="bool"         value="$(arg magnetometer)"		/>
+
+	<!-- Command publisher -->
+    <node name="get_calibration_params"  pkg="muse_ros"     type="get_calibration_params"    output="screen"/>
+
+
+</launch>

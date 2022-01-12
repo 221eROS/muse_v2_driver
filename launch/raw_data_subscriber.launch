@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Raw data publisher -->
+    <node name="raw_data_publisher"  pkg="muse_ros"     type="raw_data_subscriber"    output="screen" required="true"/>
+
+</launch>

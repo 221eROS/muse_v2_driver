@@ -1,0 +1,7 @@
+bool get_gyroscope_offset
+bool get_accelerometer_calib_params
+bool get_magnetometer_calib_params
+---
+float64[] current_gyro_offset
+float64[] current_acc_params
+float64[] current_mag_params

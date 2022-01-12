@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<!-- Available Commands -->	
+	<arg name="gyroscope_full_scale"			default="true"				/>
+	<arg name="accelerometer_full_scale"		default="true"				/>
+	<arg name="accelerometer_hdr_full_scale"	default="true"				/>
+	<arg name="magnetometer_full_scale"			default="true"				/>
+	<arg name="log_mode"						default="true"				/>
+	<arg name="log_frequency"					default="true"				/>
+	
+	<param name="get_gyroscope_full_scale"			type="bool"         value="$(arg gyroscope_full_scale)"			/>
+	<param name="get_accelerometer_full_scale"		type="bool"         value="$(arg accelerometer_full_scale)"		/>
+	<param name="get_accelerometer_hdr_full_scale"	type="bool"         value="$(arg accelerometer_hdr_full_scale)"	/>
+	<param name="get_magnetometer_full_scale"		type="bool"         value="$(arg magnetometer_full_scale)"		/>
+	<param name="get_log_mode"						type="bool"         value="$(arg log_mode)"						/>
+	<param name="get_log_frequency"					type="bool"         value="$(arg log_frequency)"				/>
+
+	<!-- Command publisher -->
+    <node name="get_configuration_params"  pkg="muse_ros"     type="get_configuration_params"    output="screen"/>
+
+
+</launch>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Shutdown -->
+    <node name="shutdown"  pkg="muse_ros"     type="shutdown"    output="screen"/>
+
+</launch>

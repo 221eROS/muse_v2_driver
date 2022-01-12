@@ -1,0 +1,7 @@
+bool calibrate_gyroscope
+bool calibrate_accelerometer
+bool calibrate_magnetometer
+---
+float64[] new_gyro_params
+float64[] new_acc_params
+float64[] new_mag_params

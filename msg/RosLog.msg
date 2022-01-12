@@ -1,0 +1,7 @@
+int32 mode
+int32 freq
+int32 timestamp
+geometry_msgs/Vector3 linear_acceleration
+geometry_msgs/Vector3 gyroscope_angular_velocity
+geometry_msgs/Vector3 magnetic_field
+geometry_msgs/Quaternion quaternion

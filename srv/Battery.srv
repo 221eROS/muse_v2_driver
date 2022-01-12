@@ -1,0 +1,5 @@
+bool get_battery_charge
+bool get_battery_voltage
+----
+float64 battery_charge
+float64 battery_voltage

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Stop transmission -->
+    <node name="stop_transmission"  pkg="muse_ros"     type="stop_transmission"    output="screen"/>
+
+</launch>

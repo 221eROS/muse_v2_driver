@@ -1,0 +1,13 @@
+bool get_available_memory
+bool erase_memory
+bool read_memory
+int8 read_file
+bool get_files
+---
+int32 memory
+bool memory_erased
+string dest_path
+int32 number_of_files_stored
+int32[] corrupt_stored_list
+bool file_stored
+string[] file_list

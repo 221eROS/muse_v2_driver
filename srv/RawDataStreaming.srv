@@ -1,0 +1,13 @@
+bool get_imu
+bool get_quaternion
+bool get_angular_velocity
+bool get_acceleration
+bool get_mag
+bool get_rpy
+---
+bool imu_published
+bool quaternion_published
+bool angular_velocity_published
+bool acceleration_published
+bool mag_published
+bool rpy_published

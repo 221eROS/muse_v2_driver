@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Available Commands -->	
+	<arg name="get_available_memory"	default="false"		/>
+	<arg name="erase_memory"			default="false"		/>
+	<arg name="read_memory"				default="false"		/>
+	<arg name="read_file"				default="0"		/>
+	<arg name="get_files"				default="false"		/>
+
+
+	<arg name="dest_path"				default="$(find muse_ros)/config/"		/>
+	
+	<param name="get_available_memory"		type="bool"         value="$(arg get_available_memory)"	/>
+	<param name="erase_memory"				type="bool"         value="$(arg erase_memory)"			/>
+	<param name="read_memory"				type="bool"         value="$(arg read_memory)"			/>
+	<param name="read_file"					type="int"			value="$(arg read_file)"			/>
+	<param name="get_files"					type="bool"         value="$(arg get_files)"			/>
+	<param name="dest_path"					type="string"       value="$(arg dest_path)"			/>
+
+	<!-- Command publisher -->
+    <node name="logger"  pkg="muse_ros"     type="logger"    output="screen"/>
+
+
+</launch>
