@@ -28,6 +28,6 @@
 	<param name="get_mag"				type="bool"         value="$(arg mag)"					/>
 
 	<!-- Command publisher -->
-    <node name="start_transmission"		pkg="muse_ros"		type="start_transmission"    output="screen" required="true"/>
+    <node name="start_transmission"		pkg="muse_v2_driver"		type="muse_v2_start_transmission"    output="screen" required="true"/>
 
 </launch>

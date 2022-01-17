@@ -2,6 +2,6 @@
 <launch>
 
 	<!-- Shutdown -->
-    <node name="shutdown"  pkg="muse_ros"     type="shutdown"    output="screen"/>
+    <node name="shutdown"  pkg="muse_v2_driver"     type="muse_v2_shutdown"    output="screen"/>
 
 </launch>

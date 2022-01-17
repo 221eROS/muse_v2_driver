@@ -1,6 +1,6 @@
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 
-void muse_v2_driver::Muse::setupParams(ros::NodeHandle& node) {
+void muse_v2_driver::MuseV2::setupParams(ros::NodeHandle& node) {
 
 	if (!node.getParam("frame_id", params.frame_id))
 		ROS_WARN("No frame_id parameter found on server. Use default one.");
@@ -21,26 +21,26 @@ void muse_v2_driver::Muse::setupParams(ros::NodeHandle& node) {
 		params.timeout = (Timeout)(temp_timeout);
 }
 
-bool muse_v2_driver::Muse::stopTransmission(StopTransmission::Request& req, StopTransmission::Response& res, Muse* muse)
+bool muse_v2_driver::MuseV2::stopTransmission(StopTransmission::Request& req, StopTransmission::Response& res, MuseV2* muse_v2)
 {
 	ROS_INFO("request: stop_transmission=%s", req.stop_transmission ? "true" : "false");
 
 	if (req.stop_transmission) {
-		muse->serial->stopTransmission();
+		muse_v2->serial->stopTransmission();
 		res.transmission_stopped = true;
 	}
 
 	return res.transmission_stopped;
 }
 
-bool muse_v2_driver::Muse::shutdown(Shutdown::Request& req, Shutdown::Response& res, Muse* muse, std::vector<ros::Subscriber>& sub_vect)
+bool muse_v2_driver::MuseV2::shutdown(Shutdown::Request& req, Shutdown::Response& res, MuseV2* muse_v2, std::vector<ros::Subscriber>& sub_vect)
 {
 	ROS_INFO("request: shutdown=%s", req.shutdown ? "true" : "false");
 
 	if (req.shutdown) {
 		for (auto& s : sub_vect)
 			s.shutdown();
-		muse->serial->shutdown();
+		muse_v2->serial->shutdown();
 		res.off = true;
 		ros::shutdown();
 	}
@@ -48,7 +48,7 @@ bool muse_v2_driver::Muse::shutdown(Shutdown::Request& req, Shutdown::Response& 
 	return res.off;
 }
 
-bool muse_v2_driver::Muse::disconnect(Disconnect::Request& req, Disconnect::Response& res, Muse* muse, std::vector<ros::Subscriber>& sub_vect)
+bool muse_v2_driver::MuseV2::disconnect(Disconnect::Request& req, Disconnect::Response& res, MuseV2* muse_v2, std::vector<ros::Subscriber>& sub_vect)
 {
 	ROS_INFO("request: disconnect=%s", req.disconnect ? "true" : "false");
 
@@ -56,7 +56,7 @@ bool muse_v2_driver::Muse::disconnect(Disconnect::Request& req, Disconnect::Resp
 		for (auto& s : sub_vect)
 			s.shutdown();
 
-		muse->serial->disconnect();
+		muse_v2->serial->disconnect();
 		res.disconnected = true;
 	}
 	

@@ -4,12 +4,12 @@
     <!-- Available Commands -->	
 	<arg name="get_available_memory"	default="false"		/>
 	<arg name="erase_memory"			default="false"		/>
-	<arg name="read_memory"				default="false"		/>
+	<arg name="read_memory"				default="true"		/>
 	<arg name="read_file"				default="0"		/>
 	<arg name="get_files"				default="false"		/>
 
 
-	<arg name="dest_path"				default="$(find muse_ros)/config/"		/>
+	<arg name="dest_path"				default="$(find muse_v2_driver)/config/"		/>
 	
 	<param name="get_available_memory"		type="bool"         value="$(arg get_available_memory)"	/>
 	<param name="erase_memory"				type="bool"         value="$(arg erase_memory)"			/>
@@ -19,7 +19,7 @@
 	<param name="dest_path"					type="string"       value="$(arg dest_path)"			/>
 
 	<!-- Command publisher -->
-    <node name="logger"  pkg="muse_ros"     type="logger"    output="screen"/>
+    <node name="logger"  pkg="muse_v2_driver"     type="muse_v2_logger"    output="screen"/>
 
 
 </launch>

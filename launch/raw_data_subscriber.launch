@@ -2,6 +2,6 @@
 <launch>
 
 	<!-- Raw data publisher -->
-    <node name="raw_data_publisher"  pkg="muse_ros"     type="raw_data_subscriber"    output="screen" required="true"/>
+    <node name="raw_data_publisher"  pkg="muse_v2_driver"     type="muse_v2_raw_data_subscriber"    output="screen" required="true"/>
 
 </launch>

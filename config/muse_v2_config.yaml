@@ -1,0 +1,17 @@
+# Default: 0 Available: 500, 1000, 2000, 4000
+gyroscope_full_scale: 0
+
+# Default: 0 Available: 2, 4, 6, 8, 16
+accelerometer_full_scale: 0
+
+# Default: 0 Available: 100, 200, 400 
+accelerometer_hdr_full_scale: 0
+
+# Default: 0 Available: 2, 4, 8, 12 
+magnetometer_full_scale: 0 
+
+# Default: UINT8_MAX Available: 0, 1, 2, 3, 4, 5
+log_mode: 255
+
+# Default: UINT8_MAX Available: <= 250
+log_frequency: 255

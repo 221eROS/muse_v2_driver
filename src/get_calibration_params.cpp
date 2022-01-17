@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 
     if (client.call(srv))
     {
-        std::string calib_file_path = ros::package::getPath("muse_ros") + "/config/muse_calib.txt";
+        std::string calib_file_path = ros::package::getPath("muse_v2_driver") + "/config/muse_calib.txt";
         std::ofstream muse_calib_file;
 
         muse_calib_file.open(calib_file_path);
@@ -48,7 +48,7 @@ int main(int argc, char** argv)
             stream.str(std::string());
 
             stream << "X" << "\t" << "Y" << "\t" << "Z" << "\n";
-            stream << std::setprecision(3) << std::fixed << srv.response.current_gyro_offset[0] << "\t" << srv.response.current_gyro_offset[1] << "\t" << srv.response.current_gyro_offset[2];
+            stream << std::setprecision(6) << std::fixed << srv.response.current_gyro_offset[0] << "\t" << srv.response.current_gyro_offset[1] << "\t" << srv.response.current_gyro_offset[2];
 
             ROS_INFO_STREAM("Gyroscope Calibration params: \n" << stream.str());
 
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
             stream.str(std::string());
 
             stream << "X" << "\t" << "Y" << "\t" << "Z" << "\t" << "offset" << "\n";
-            stream << std::setprecision(3) << std::fixed << srv.response.current_acc_params[0] << "\t" << srv.response.current_acc_params[1] << "\t" << srv.response.current_acc_params[2] << "\t" << srv.response.current_acc_params[9] << "\n";
+            stream << std::setprecision(6) << std::fixed << srv.response.current_acc_params[0] << "\t" << srv.response.current_acc_params[1] << "\t" << srv.response.current_acc_params[2] << "\t" << srv.response.current_acc_params[9] << "\n";
             stream << srv.response.current_acc_params[3] << "\t" << srv.response.current_acc_params[4] << "\t" << srv.response.current_acc_params[5] << "\t" << srv.response.current_acc_params[10] << "\n";
             stream << srv.response.current_acc_params[6] << "\t" << srv.response.current_acc_params[7] << "\t" << srv.response.current_acc_params[8] << "\t" << srv.response.current_acc_params[11];
 
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
             stream.str(std::string());
 
             stream << "X" << "\t" << "Y" << "\t" << "Z" << "\t" << "offset" << "\n";
-            stream << std::setprecision(3) << std::fixed << srv.response.current_mag_params[0] << "\t" << srv.response.current_mag_params[1] << "\t" << srv.response.current_mag_params[2] << "\t" << srv.response.current_mag_params[9] << "\n";
+            stream << std::setprecision(6) << std::fixed << srv.response.current_mag_params[0] << "\t" << srv.response.current_mag_params[1] << "\t" << srv.response.current_mag_params[2] << "\t" << srv.response.current_mag_params[9] << "\n";
             stream << srv.response.current_mag_params[3] << "\t" << srv.response.current_mag_params[4] << "\t" << srv.response.current_mag_params[5] << "\t" << srv.response.current_mag_params[10] << "\n";
             stream << srv.response.current_mag_params[6] << "\t" << srv.response.current_mag_params[7] << "\t" << srv.response.current_mag_params[8] << "\t" << srv.response.current_mag_params[11];
 

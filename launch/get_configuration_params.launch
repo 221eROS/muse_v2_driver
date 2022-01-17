@@ -17,7 +17,7 @@
 	<param name="get_log_frequency"					type="bool"         value="$(arg log_frequency)"				/>
 
 	<!-- Command publisher -->
-    <node name="get_configuration_params"  pkg="muse_ros"     type="get_configuration_params"    output="screen"/>
+    <node name="get_configuration_params"  pkg="muse_v2_driver"     type="muse_v2_get_configuration_params"    output="screen"/>
 
 
 </launch>

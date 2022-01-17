@@ -5,7 +5,7 @@
 	<arg name="publisher_queue_size"	default="10"				/>
 
 	<!-- Connection port -->
-	<arg name="port_name"				default="COM4"				/>
+	<arg name="port_name"				default="COM5"				/>
 
 	<!-- Desired baudrate -->
 	<arg name="baudrate"				default="115200"            />
@@ -20,6 +20,6 @@
 	<param name="frame_id"              type="string"       value="$(arg frame_id)"                 />
 
 	<!-- Data publisher -->
-    <node name="muse"          pkg="muse_ros"     type="muse"    output="screen" required="true"/>
+    <node name="muse"          pkg="muse_v2_driver"     type="muse_v2"    output="screen" required="true"/>
 
 </launch>

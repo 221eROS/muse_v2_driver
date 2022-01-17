@@ -1,7 +1,7 @@
 #ifndef STREAM_H
 #define STREAM_H
 
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 
 #include <geometry_msgs/QuaternionStamped.h>
 #include <geometry_msgs/Vector3Stamped.h>
@@ -9,7 +9,7 @@
 #include <sensor_msgs/MagneticField.h>
 #include <muse_v2_driver/Transmission.h>
 
-#include <muse/Muse_HW.h>
+#include <muse_v2/MuseV2_HW.h>
 
 #include <tf/tf.h>
 
@@ -68,7 +68,7 @@ namespace muse_v2_driver {
 
 		void setupInputCommands(ros::NodeHandle& node);
 		bool isFrequencyAdmissible(int frequency);
-		void StreamRawData(const Transmission::ConstPtr& msg, Muse* muse);
+		void StreamRawData(const Transmission::ConstPtr& msg, MuseV2* muse_v2);
 
 	};
 }

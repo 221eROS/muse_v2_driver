@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(muse_v2_driver)
 
 find_package(catkin REQUIRED
@@ -39,14 +39,13 @@ generate_messages(DEPENDENCIES
 find_package(lib221e CONFIG REQUIRED)
 include_directories(${lib221e_INCLUDE_DIRS})
 
-find_library(MUSE_LIB NAMES Muse PATHS ${lib221e_INCLUDE_DIRS})
-message(STATUS ${MUSE_LIB})
+find_library(MUSE_V2_LIB NAMES MuseV2 PATHS ${lib221e_INCLUDE_DIRS})
+message(STATUS ${MUSE_V2_LIB})
 
 find_library(SERIAL_LIB NAMES Connection PATHS ${lib221e_INCLUDE_DIRS})
 message(STATUS ${SERIAL_LIB})
 
-set(Boost_DIR C:/Boost/lib/cmake/Boost-1.76.0)
-find_package(Boost REQUIRED COMPONENTS date_time PATHS ${Boost_DIR})
+find_package(Boost REQUIRED COMPONENTS date_time)
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 LINK_DIRECTORIES(${Boost_LIBRARY_DIRS})
 
@@ -62,7 +61,7 @@ include_directories(
   ${lib221e_INCLUDE_DIRS}
 )
 
-set(SOURCES src/internal/Muse.cpp
+set(SOURCES src/internal/MuseV2.cpp
 	    src/internal/Stream.cpp
 	    src/internal/Miscellaneous.cpp
         src/internal/Configuration.cpp
@@ -70,42 +69,42 @@ set(SOURCES src/internal/Muse.cpp
 	    src/internal/Memory.cpp
     )
 
-add_executable(muse "src/muse.cpp" ${SOURCES})
-add_dependencies(muse ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(muse ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2 "src/muse_v2.cpp" ${SOURCES})
+add_dependencies(muse_v2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2 ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(stop_transmission "src/stop_transmission.cpp" ${SOURCES})
-add_dependencies(stop_transmission ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(stop_transmission ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_stop_transmission "src/stop_transmission.cpp" ${SOURCES})
+add_dependencies(muse_v2_stop_transmission ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_stop_transmission ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(shutdown "src/shutdown.cpp" ${SOURCES})
-add_dependencies(shutdown ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(shutdown ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_shutdown "src/shutdown.cpp" ${SOURCES})
+add_dependencies(muse_v2_shutdown ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_shutdown ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(battery "src/battery.cpp" ${SOURCES})
-add_dependencies(battery ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(battery ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_battery "src/battery.cpp" ${SOURCES})
+add_dependencies(muse_v2_battery ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_battery ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(get_configuration_params "src/get_configuration_params.cpp" ${SOURCES})
-add_dependencies(get_configuration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(get_configuration_params ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_get_configuration_params "src/get_configuration_params.cpp" ${SOURCES})
+add_dependencies(muse_v2_get_configuration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_get_configuration_params ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(set_configuration_params "src/set_configuration_params.cpp" ${SOURCES})
-add_dependencies(set_configuration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(set_configuration_params ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_set_configuration_params "src/set_configuration_params.cpp" ${SOURCES})
+add_dependencies(muse_v2_set_configuration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_set_configuration_params ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(get_calibration_params "src/get_calibration_params.cpp" ${SOURCES})
-add_dependencies(get_calibration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(get_calibration_params ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_get_calibration_params "src/get_calibration_params.cpp" ${SOURCES})
+add_dependencies(muse_v2_get_calibration_params ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_get_calibration_params ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(logger "src/logger.cpp" ${SOURCES})
-add_dependencies(logger ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(logger ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_logger "src/logger.cpp" ${SOURCES})
+add_dependencies(muse_v2_logger ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_logger ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(start_transmission "src/start_transmission.cpp" ${SOURCES})
-add_dependencies(start_transmission ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(start_transmission ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_start_transmission "src/start_transmission.cpp" ${SOURCES})
+add_dependencies(muse_v2_start_transmission ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_start_transmission ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
 
-add_executable(raw_data_subscriber "src/raw_data_subscriber.cpp" ${SOURCES})
-add_dependencies(raw_data_subscriber ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(raw_data_subscriber ${catkin_LIBRARIES} ${MUSE_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 
+add_executable(muse_v2_raw_data_subscriber "src/raw_data_subscriber.cpp" ${SOURCES})
+add_dependencies(muse_v2_raw_data_subscriber ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(muse_v2_raw_data_subscriber ${catkin_LIBRARIES} ${MUSE_V2_LIB} ${SERIAL_LIB} ${Boost_LIBRARIES}) 

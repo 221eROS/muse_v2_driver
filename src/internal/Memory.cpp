@@ -10,7 +10,7 @@ void muse_v2_driver::Memory::setupInputCommands(ros::NodeHandle& node) {
 
 }
 
-bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManagement::Response& res, Muse* muse) {
+bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManagement::Response& res, MuseV2* muse_v2) {
 
 	bool out = false;
 
@@ -27,8 +27,8 @@ bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManage
 			received_command.get_available_memory = true;
 			ROS_INFO("Trying getting Available Memory.");
 		}
-		if (muse->serial->getAvailableMemory() > 0) {
-			res.memory = muse->serial->getAvailableMemory();
+		if (muse_v2->serial->getAvailableMemory() > 0) {
+			res.memory = muse_v2->serial->getAvailableMemory();
 			out = true;
 			ROS_INFO("Sending back Available Memory.");
 		}
@@ -39,7 +39,7 @@ bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManage
 			received_command.erase_memory = true;
 			ROS_INFO("Trying erasing memory.");
 		}
-		if (muse->serial->eraseMemory()) {
+		if (muse_v2->serial->eraseMemory()) {
 			res.memory_erased = true;
 			out = true;
 			ROS_INFO("Memory erased.");
@@ -51,8 +51,8 @@ bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManage
 			received_command.get_files = true;
 			ROS_INFO("Trying getting file names list.");
 		}
-		if (!muse->serial->getFiles().empty()) {
-			vector<pair<int, string>> file_names = muse->serial->getFiles();
+		if (!muse_v2->serial->getFiles().empty()) {
+			vector<pair<int, string>> file_names = muse_v2->serial->getFiles();
 			out = true;
 			for (const auto& file : file_names)
 				res.file_list.push_back(file.second);
@@ -69,18 +69,18 @@ bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManage
 
 		out = true;
 
-		if (muse->serial->readFile(req.read_file).empty()) {
+		if (muse_v2->serial->readFile(req.read_file).empty()) {
 			ROS_INFO("File not found. Please check the list of available files.");
 			res.file_stored = false;
 			res.dest_path = "";
 			return out;
 		}
 		else {
-			if (!muse->serial->getFiles().empty()) {
-				vector<pair<int, string>> file_names = muse->serial->getFiles();
-				vector<Log> logs = muse->serial->readFile(req.read_file);
-				string dest_file = ros::package::getPath("muse_ros") + "/config/" + file_names.at(req.read_file - 1).second + ".txt";
-				if (muse->serial->storeLogs(dest_file, logs)) {
+			if (!muse_v2->serial->getFiles().empty()) {
+				vector<pair<int, string>> file_names = muse_v2->serial->getFiles();
+				vector<Log> logs = muse_v2->serial->readFile(req.read_file);
+				string dest_file = ros::package::getPath("muse_v2_driver") + "/config/" + file_names.at(req.read_file - 1).second + ".txt";
+				if (muse_v2->serial->storeLogs(dest_file, logs)) {
 					res.file_stored = true;
 					res.dest_path = dest_file;
 					ROS_INFO("Data stored at %s", dest_file.c_str());
@@ -99,31 +99,31 @@ bool muse_v2_driver::Memory::logger(MemoryManagement::Request& req, MemoryManage
 
 		int i = 0;
 		int file_stored = 0;
-		string dest_path = ros::package::getPath("muse_ros") + "/config/";
+		string dest_path = ros::package::getPath("muse_v2_driver") + "/config/";
 		out = true;
 		
-		if (muse->serial->getFiles().empty()) {
+		if (muse_v2->serial->getFiles().empty()) {
 			ROS_INFO("Files not found");
 			res.number_of_files_stored = 0;
 			res.dest_path = "";
 			return out;
 		}
 
-		vector<pair<int, string>> file_names = muse->serial->getFiles();
+		vector<pair<int, string>> file_names = muse_v2->serial->getFiles();
 
 		while (i < file_names.size()) {
 			ROS_INFO_STREAM("Processing file " << i + 1 << " of " << file_names.size() << ": " << file_names.at(i).second << ".txt");
 
-			if (muse->serial->readFile(req.read_file).empty()) {
+			if (muse_v2->serial->readFile(req.read_file).empty()) {
 				ROS_INFO("File %d not properly read", i + 1);
 				res.corrupt_stored_list.push_back(i);
 			}
 
-			std::vector<Log> logs = muse->serial->readFile(req.read_file);
+			std::vector<Log> logs = muse_v2->serial->readFile(req.read_file);
 			ROS_INFO("# of logs to store: %lu", logs.size());
 
 			std::string dest_file = dest_path + file_names.at(i).second + ".txt";
-			if (muse->serial->storeLogs(dest_file, logs)) {
+			if (muse_v2->serial->storeLogs(dest_file, logs)) {
 				file_stored++;
 				ROS_INFO("Data stored at %s", dest_file.c_str());
 			}

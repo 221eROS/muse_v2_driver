@@ -1,7 +1,7 @@
 #ifndef MISCELLANEOUS_H
 #define MISCELLANEOUS_H
 
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 #include <muse_v2_driver/Battery.h>
 
 namespace muse_v2_driver {
@@ -30,7 +30,7 @@ namespace muse_v2_driver {
 		~Miscellaneous() = default;
 
 		void setupInputCommands(ros::NodeHandle& node);
-		bool getBattery(Battery::Request& req, Battery::Response& res, Muse* muse);
+		bool getBattery(Battery::Request& req, Battery::Response& res, MuseV2* muse_v2);
 
 	};
 }

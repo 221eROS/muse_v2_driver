@@ -64,7 +64,7 @@
 
 	<!-- IMU Rviz plugin -->
 	<group if="$(arg imu)">
-		<node type="rviz" name="imu_view" pkg="rviz" args="-d $(find muse_ros)/rviz/imu_config.rviz"/>
+		<node type="rviz" name="imu_view" pkg="rviz" args="-d $(find muse_v2_driver)/rviz/imu_config.rviz"/>
 	</group>
 
 </launch>

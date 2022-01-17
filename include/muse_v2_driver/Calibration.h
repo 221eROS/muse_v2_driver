@@ -2,7 +2,7 @@
 #define CALIBRATION_H
 
 #include <ros/package.h>
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 #include <muse_v2_driver/GetCalibrationParams.h>
 #include <fstream>
 
@@ -41,7 +41,7 @@ namespace muse_v2_driver {
 		~Calibration() = default;
 
 		void setupInputCommands(ros::NodeHandle& node);
-		bool getCalibrationParams(GetCalibrationParams::Request& req, GetCalibrationParams::Response& res, Muse* muse);
+		bool getCalibrationParams(GetCalibrationParams::Request& req, GetCalibrationParams::Response& res, MuseV2* muse_v2);
 	};
 }
 

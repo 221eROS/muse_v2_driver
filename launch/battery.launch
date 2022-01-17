@@ -9,7 +9,7 @@
 	<param name="get_battery_voltage"		type="bool"         value="$(arg voltage)"			/>
 
 	<!-- Command publisher -->
-    <node name="battery"  pkg="muse_ros"     type="battery"    output="screen"/>
+    <node name="battery"  pkg="muse_v2_driver"     type="muse_v2_battery"    output="screen"/>
 
 
 </launch>

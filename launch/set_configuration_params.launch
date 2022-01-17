@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 	
-	<rosparam file="$(find muse_ros)/config/muse_config.yaml" />
+	<rosparam file="$(find muse_v2_driver)/config/muse_v2_config.yaml" />
 	
 	<!-- Command setting service -->
-    <node name="set_configuration_params"  pkg="muse_ros"     type="set_configuration_params"    output="screen"/>
+    <node name="set_configuration_params"  pkg="muse_v2_driver"     type="muse_v2_set_configuration_params"    output="screen"/>
 
 
 </launch>

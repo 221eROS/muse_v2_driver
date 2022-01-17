@@ -3,7 +3,7 @@
 
 #include <ros/package.h>
 
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 #include <muse_v2_driver/MemoryManagement.h>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -50,7 +50,7 @@ namespace muse_v2_driver {
 		~Memory() = default;
 
 		void setupInputCommands(ros::NodeHandle& node);
-		bool logger(MemoryManagement::Request& req, MemoryManagement::Response& res, Muse* muse);
+		bool logger(MemoryManagement::Request& req, MemoryManagement::Response& res, MuseV2* muse_v2);
 	
 
 	};

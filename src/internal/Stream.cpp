@@ -24,7 +24,7 @@ void muse_v2_driver::Stream::setupInputCommands(ros::NodeHandle& node) {
 bool muse_v2_driver::Stream::isFrequencyAdmissible(int frequency) {
 	bool result = false;
 
-	if (frequency <= Muse_HW::MAX_STREAM_FREQUENCY)
+	if (frequency <= MuseV2_HW::MAX_STREAM_FREQUENCY)
 		result = true;
 	else { ROS_ERROR("Invalid frequency."); }
 
@@ -32,7 +32,7 @@ bool muse_v2_driver::Stream::isFrequencyAdmissible(int frequency) {
 
 }
 
-void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Muse* muse) {
+void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, MuseV2* muse_v2) {
 
 	if (!msg->transmission.data.empty() && std::find(msg->transmission.data.begin(), msg->transmission.data.end(), static_cast<int>(CommandType::GET_IMU)) != msg->transmission.data.end()) {
 
@@ -41,10 +41,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start Imu transmission.");
 		}
 
-		Imu imu = muse->serial->getIMU(msg->frequency);
+		Imu imu = muse_v2->serial->getIMU(msg->frequency);
 
 		imu_msg.header.stamp = ros::Time::now();
-		imu_msg.header.frame_id = muse->params.frame_id;
+		imu_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// Quaternion
 		imu_msg.orientation.w = imu.quaternion.w;
@@ -71,10 +71,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start Quaternion transmission.");
 		}
 
-		Quaternion quaternion = muse->serial->getQuaternion(msg->frequency);
+		Quaternion quaternion = muse_v2->serial->getQuaternion(msg->frequency);
 
 		quaternion_msg.header.stamp = ros::Time::now();
-		quaternion_msg.header.frame_id = muse->params.frame_id;
+		quaternion_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// Quaternion
 		quaternion_msg.quaternion.w = quaternion.w;
@@ -92,10 +92,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start Angular Velocity transmission.");
 		}
 
-		AngularVelocity angular_velocity = muse->serial->getAngularVelocity(msg->frequency);
+		AngularVelocity angular_velocity = muse_v2->serial->getAngularVelocity(msg->frequency);
 
 		angular_velocity_msg.header.stamp = ros::Time::now();
-		angular_velocity_msg.header.frame_id = muse->params.frame_id;
+		angular_velocity_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// Angular velocity
 		angular_velocity_msg.vector.x = angular_velocity.x;
@@ -111,10 +111,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start Acceleration transmission.");
 		}
 
-		Acceleration acceleration = muse->serial->getAcceleration(msg->frequency);
+		Acceleration acceleration = muse_v2->serial->getAcceleration(msg->frequency);
 
 		acceleration_msg.header.stamp = ros::Time::now();
-		acceleration_msg.header.frame_id = muse->params.frame_id;
+		acceleration_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// Acceleration
 		acceleration_msg.vector.x = acceleration.x;
@@ -130,10 +130,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start Mag transmission.");
 		}
 
-		MagneticField mag = muse->serial->getMag(msg->frequency);
+		MagneticField mag = muse_v2->serial->getMag(msg->frequency);
 
 		mag_msg.header.stamp = ros::Time::now();
-		mag_msg.header.frame_id = muse->params.frame_id;
+		mag_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// Magnetic Field
 		mag_msg.magnetic_field.x = mag.x;
@@ -150,10 +150,10 @@ void muse_v2_driver::Stream::StreamRawData(const Transmission::ConstPtr& msg, Mu
 			ROS_INFO("Start RPY transmission.");
 		}
 
-		EulerAngles rpy = muse->serial->getRPY(msg->frequency);
+		EulerAngles rpy = muse_v2->serial->getRPY(msg->frequency);
 
 		rpy_msg.header.stamp = ros::Time::now();
-		rpy_msg.header.frame_id = muse->params.frame_id;
+		rpy_msg.header.frame_id = muse_v2->params.frame_id;
 
 		// RPY
 		rpy_msg.vector.x = rpy.roll;

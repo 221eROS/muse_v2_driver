@@ -5,7 +5,7 @@ void muse_v2_driver::Miscellaneous::setupInputCommands(ros::NodeHandle& node) {
 	node.getParam("get_battery_voltage", input_command.get_battery_voltage);
 }
 
-bool muse_v2_driver::Miscellaneous::getBattery(Battery::Request& req, Battery::Response& res, Muse* muse)
+bool muse_v2_driver::Miscellaneous::getBattery(Battery::Request& req, Battery::Response& res, MuseV2* muse_v2)
 {
 	bool out = false;
 
@@ -19,8 +19,8 @@ bool muse_v2_driver::Miscellaneous::getBattery(Battery::Request& req, Battery::R
 			ROS_INFO("Asking Battery Charge.");
 		}
 
-		if (muse->serial->getBatteryCharge() > -1) {
-			res.battery_charge = muse->serial->getBatteryCharge();
+		if (muse_v2->serial->getBatteryCharge() > -1) {
+			res.battery_charge = muse_v2->serial->getBatteryCharge();
 			out = true;
 			ROS_INFO("Sending back battery charge (%%): %.2f", res.battery_charge);
 		}
@@ -30,8 +30,8 @@ bool muse_v2_driver::Miscellaneous::getBattery(Battery::Request& req, Battery::R
 			received_command.get_battery_voltage = true;
 			ROS_INFO("Asking Battery Voltage.");
 		}
-		if (muse->serial->getBatteryVoltage() > -1) {
-			res.battery_voltage = muse->serial->getBatteryVoltage();
+		if (muse_v2->serial->getBatteryVoltage() > -1) {
+			res.battery_voltage = muse_v2->serial->getBatteryVoltage();
 			out = true;
 			ROS_INFO("Sending back battery voltage: %.2f", res.battery_voltage);
 		}

@@ -1,5 +1,5 @@
 #include <muse_v2_driver/Stream.h>
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 #include <muse_v2_driver/Miscellaneous.h>
 #include <muse_v2_driver/Configuration.h>
 #include <muse_v2_driver/Calibration.h>
@@ -11,10 +11,10 @@ int main(int argc, char** argv)
 
 	ros::NodeHandle n;
 
-	muse_v2_driver::Muse muse(n);
+	muse_v2_driver::MuseV2 muse_v2(n);
 
-	ROS_INFO("Port name: %s", muse.params.port_name);
-	ROS_INFO("Baudrate: %d", muse.params.baudrate);
+	ROS_INFO("Port name: %s", muse_v2.params.port_name);
+	ROS_INFO("Baudrate: %d", muse_v2.params.baudrate);
 
 	int publisher_queue_size;
 
@@ -29,32 +29,32 @@ int main(int argc, char** argv)
 
 	std::vector<ros::Subscriber> sub_vect;
 
-	ros::Subscriber stream_sub = n.subscribe<muse_v2_driver::Transmission>("start_transmission", 1, boost::bind(&muse_v2_driver::Stream::StreamRawData, &stream, _1, &muse));
+	ros::Subscriber stream_sub = n.subscribe<muse_v2_driver::Transmission>("start_transmission", 1, boost::bind(&muse_v2_driver::Stream::StreamRawData, &stream, _1, &muse_v2));
 	sub_vect.push_back(stream_sub);
 
 	ros::ServiceServer stop_transmission_srv = n.advertiseService<muse_v2_driver::StopTransmission::Request, muse_v2_driver::StopTransmission::Response>
-		("stop_transmission", boost::bind(&muse_v2_driver::Muse::stopTransmission, &muse, _1, _2, &muse));
+		("stop_transmission", boost::bind(&muse_v2_driver::MuseV2::stopTransmission, &muse_v2, _1, _2, &muse_v2));
 
 	ros::ServiceServer shutdown_srv = n.advertiseService<muse_v2_driver::Shutdown::Request, muse_v2_driver::Shutdown::Response>
-		("shutdown", boost::bind(&muse_v2_driver::Muse::shutdown, &muse, _1, _2, &muse, sub_vect));
+		("shutdown", boost::bind(&muse_v2_driver::MuseV2::shutdown, &muse_v2, _1, _2, &muse_v2, sub_vect));
 
 	ros::ServiceServer battery_srv = n.advertiseService<muse_v2_driver::Battery::Request, muse_v2_driver::Battery::Response>
-		("battery", boost::bind(&muse_v2_driver::Miscellaneous::getBattery, &misc, _1, _2, &muse));
+		("battery", boost::bind(&muse_v2_driver::Miscellaneous::getBattery, &misc, _1, _2, &muse_v2));
 
 	ros::ServiceServer get_config_params_srv = n.advertiseService<muse_v2_driver::GetConfigurationParams::Request, muse_v2_driver::GetConfigurationParams::Response>
-		("get_configuration_params", boost::bind(&muse_v2_driver::Configuration::getConfigurationParams, &config, _1, _2, &muse));
+		("get_configuration_params", boost::bind(&muse_v2_driver::Configuration::getConfigurationParams, &config, _1, _2, &muse_v2));
 
 	ros::ServiceServer set_config_params_srv = n.advertiseService<muse_v2_driver::SetConfigurationParams::Request, muse_v2_driver::SetConfigurationParams::Response>
-		("set_configuration_params", boost::bind(&muse_v2_driver::Configuration::setConfigurationParams, &config, _1, _2, &muse));
+		("set_configuration_params", boost::bind(&muse_v2_driver::Configuration::setConfigurationParams, &config, _1, _2, &muse_v2));
 
 	ros::ServiceServer get_calib_params_srv = n.advertiseService<muse_v2_driver::GetCalibrationParams::Request, muse_v2_driver::GetCalibrationParams::Response>
-		("get_calibration_params", boost::bind(&muse_v2_driver::Calibration::getCalibrationParams, &calib, _1, _2, &muse));
+		("get_calibration_params", boost::bind(&muse_v2_driver::Calibration::getCalibrationParams, &calib, _1, _2, &muse_v2));
 
 	ros::ServiceServer logger_srv = n.advertiseService<muse_v2_driver::MemoryManagement::Request, muse_v2_driver::MemoryManagement::Response>
-		("logger", boost::bind(&muse_v2_driver::Memory::logger, &mem, _1, _2, &muse));
+		("logger", boost::bind(&muse_v2_driver::Memory::logger, &mem, _1, _2, &muse_v2));
 
 
-	ROS_INFO("Muse ready.");
+	ROS_INFO("Muse V2 ready.");
 
 	ros::spin();
 

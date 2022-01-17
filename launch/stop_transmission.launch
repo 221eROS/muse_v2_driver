@@ -2,6 +2,6 @@
 <launch>
 
 	<!-- Stop transmission -->
-    <node name="stop_transmission"  pkg="muse_ros"     type="stop_transmission"    output="screen"/>
+    <node name="stop_transmission"  pkg="muse_v2_driver"     type="muse_v2_stop_transmission"    output="screen"/>
 
 </launch>

@@ -11,7 +11,7 @@
 	<param name="get_magnetometer_calib_params"		type="bool"         value="$(arg magnetometer)"		/>
 
 	<!-- Command publisher -->
-    <node name="get_calibration_params"  pkg="muse_ros"     type="get_calibration_params"    output="screen"/>
+    <node name="get_calibration_params"  pkg="muse_v2_driver"     type="muse_v2_get_calibration_params"    output="screen"/>
 
 
 </launch>

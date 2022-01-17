@@ -1,7 +1,7 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#include <muse_v2_driver/Muse.h>
+#include <muse_v2_driver/MuseV2.h>
 #include <muse_v2_driver/GetConfigurationParams.h>
 #include <muse_v2_driver/SetConfigurationParams.h>
 
@@ -51,8 +51,8 @@ namespace muse_v2_driver {
 		~Configuration() = default;
 
 		void setupInputCommands(ros::NodeHandle& node);
-		bool getConfigurationParams(GetConfigurationParams::Request& req, GetConfigurationParams::Response& res, Muse* muse);
-		bool setConfigurationParams(SetConfigurationParams::Request& req, SetConfigurationParams::Response& res, Muse* muse);
+		bool getConfigurationParams(GetConfigurationParams::Request& req, GetConfigurationParams::Response& res, MuseV2* muse_v2);
+		bool setConfigurationParams(SetConfigurationParams::Request& req, SetConfigurationParams::Response& res, MuseV2* muse_v2);
 
 	};
 }
