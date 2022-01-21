@@ -2,7 +2,7 @@
 <package format="2">
 	<name>muse_v2_driver</name>
 	<version>1.0.0</version>
-	<description>ROS driver for the 221e MUltiSEnsor (MUSE) device</description>
+	<description>ROS driver for the 221e MUltiSEnsor (MUSE) V2 device</description>
 	
 	<maintainer email="info@221e.com">221e srl</maintainer>
 
