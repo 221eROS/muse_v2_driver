@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
 <package format="2">
 	<name>muse_v2_driver</name>
-	<version>0.0.0</version>
-	<description>The driver package for the 221e MUltiSEnsor (MUSE) device</description>
+	<version>1.0.0</version>
+	<description>ROS driver for the 221e MUltiSEnsor (MUSE) device</description>
 	
-	<maintainer email="elisa.tosello@221e.com">Elisa Tosello</maintainer>
-	<maintainer email="roberto.bortoletto@221e.com">Roberto Bortoletto</maintainer>
+	<maintainer email="info@221e.com">221e srl</maintainer>
 
 	<license>BSD</license>
 
-	<author email="elisa.tosello@221e.com">Elisa Tosello</author>
-	<author email="roberto.bortoletto@221e.com">Roberto Bortoletto</author>
-
+	<author email="">221e srl</author>
 
 	<buildtool_depend>catkin</buildtool_depend>
 	
